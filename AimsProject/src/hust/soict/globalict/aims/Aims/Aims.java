@@ -2,29 +2,32 @@ package hust.soict.globalict.aims.Aims;
 import hust.soict.dsai.aims.media.DigitalVideoDisc;
 import hust.soict.globalict.aims.Store.Store;
 import hust.soict.globalict.aims.cart.Cart.cart;
+import hust.soict.globalict.aims.media.MemoryDaemon;
 
 import java.util.*;
 public class Aims {
 	public static Store b=new Store();
 	public static cart anOrder = new cart();	
+	public static MemoryDaemon a=new MemoryDaemon(); 
 	public static void showMenu() 
 	{System.out.println("AIMS: ");
 	System.out.println("--------------------------------");
 	System.out.println("1. View store");
 	System.out.println("2. Update store");
 	System.out.println("3. See current cart");
+	System.out.println("4. Memory usage");
 	System.out.println("0. Exit");
 	System.out.println("--------------------------------");
-	System.out.println("Please choose a number: 0-1-2-3");
+	System.out.println("Please choose a number: 0-1-2-3-4");
 	}
 	public static void cartMenu() 
 	{
 		
 		System.out.println("Options: ");
 	System.out.println("--------------------------------");
-	System.out.println("1. Filter DVDs in cart");
-	System.out.println("2. Sort DVDs in cart");
-	System.out.println("3. Remove DVD from cart");
+	System.out.println("1. Filter medias in cart");
+	System.out.println("2. Sort medias in cart");
+	System.out.println("3. Remove media from cart");
 	System.out.println("4. Place order");
 	System.out.println("0. Back");
 	System.out.println("--------------------------------");
@@ -33,8 +36,8 @@ public class Aims {
 	public static void storeMenu() 
 	{System.out.println("Options: ");
 	System.out.println("--------------------------------");
-	System.out.println("1. See a DVD’s details");
-	System.out.println("2. Add a DVD to cart");
+	System.out.println("1. See a media’s details");
+	System.out.println("2. Add a media to cart");
 	System.out.println("3. See current cart");
 	System.out.println("0. Back");
 	System.out.println("--------------------------------");
@@ -75,9 +78,7 @@ public class Aims {
 					break;
 					
 				case 2:
-					System.out.println("Enter a media you want to buy, in word:");
-					sc.nextLine();
-					String title2 = sc.nextLine();	
+					anOrder.search();
 					break;
 				case 3:
 					anOrder.print();
@@ -95,9 +96,9 @@ public class Aims {
 			option5=sc.nextInt();
 			for(i=0;i<8;i++)
 			{
-				if (option2==1 &&option5==i) b.addmedia(null);
-				else if (option2==2 &&option5==i) b.removemedia(null);
-				if(option2==3) b.addmedia(null);
+				if (option2==1 &&option5==i) b.addmedia(b.itemsInStore.get(i));
+				else if (option2==2 &&option5==i) b.removemedia(b.itemsInStore.get(i));
+				if(option2==3) b.addmedia(b.itemsInStore.get(i));
 			}
 			Menu();
 			break;
@@ -135,22 +136,30 @@ public class Aims {
 				{
 					if (option6==i) 
 						{
-						anOrder.removeMedia(null);
+						anOrder.removeMedia(anOrder.itemsOrdered.get(i));
 						anOrder.print();
 						}
 				}
 				Menu();
 				break;
 			case 4:System.out.println("Order placed");
+			if(anOrder.itemsOrdered.size()>=5)
+			{
+				anOrder.addMedia(anOrder.getALuckyItem());
+			    System.out.println("You've been awarded a lucky item");
+			    anOrder.print();
+			}
 			for(i=0;i<anOrder.itemsOrdered.size();i++)
 			{
-				anOrder.removeMedia(null);
+				anOrder.removeMedia(anOrder.itemsOrdered.get(i));
 			}
 			break;
 			case 0:Menu();
 			break;
 			}
 			}
+		case 4:
+			a.run();
 		case 0:
 			System.out.println("The end");
 			break;

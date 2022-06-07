@@ -6,7 +6,7 @@ import hust.soict.dsai.aims.media.DigitalVideoDisc;
 import hust.soict.dsai.aims.media.Media;
 
 public class Store {
-	private ArrayList<Media> itemsInStore = new ArrayList<Media>();
+	public ArrayList<Media> itemsInStore = new ArrayList<Media>();
 	int i;
 	
 	

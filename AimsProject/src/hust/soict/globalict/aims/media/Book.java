@@ -36,10 +36,9 @@ public void  removeAuthor(String authorName) {
 	authors.remove(authorName);
 }
 
-
-
-public Book() {
-		
-	}
+public Book(String title, String category, float cost, List<String> authors) {
+	super(title, category, cost);
+	this.authors = authors;
+}
 
 }

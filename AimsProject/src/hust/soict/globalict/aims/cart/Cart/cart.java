@@ -109,6 +109,7 @@ public Media getALuckyItem(){
     luck--;
     itemsOrdered.get(luck).setCost(0F);
     return itemsOrdered.get(luck);
+    
 }
 public static DigitalVideoDisc[] sortByTitle(DigitalVideoDisc[]dvdlist)
 {
