@@ -78,9 +78,13 @@ public class Aims {
 		break;
 		case 1:
 			anOrder.SortByTitle();
+			anOrder.print();
+			cartMenu();
 			break;
 		case 2:
 			anOrder.SortByCost();
+			anOrder.print();
+			cartMenu();
 			break;
 		}
 		break;
