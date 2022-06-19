@@ -11,6 +11,7 @@ import hust.soict.globalict.aims.media.CompactDisc;
 import hust.soict.globalict.aims.media.DigitalVideoDisc;
 import hust.soict.globalict.aims.media.Media;
 import hust.soict.globalict.aims.media.Track;
+import hust.soict.globalict.aims.screen.manager.LoginScreen;
 import hust.soict.globalict.aims.screen.manager.StoreManagerScreen;
 public class Aims {
 	
@@ -256,13 +257,13 @@ public class Aims {
 							String choice12=sc.nextLine();
 							System.out.println("Category:");
 							String choice13=sc.nextLine();
-							System.out.println("Artist:");
-							String choice14=sc.nextLine();
-							System.out.println("Director:");
-							String choice15=sc.nextLine();
+							
 							System.out.println("Cost:");
 							float choice16=sc.nextFloat();
-							CompactDisc cd=new CompactDisc(choice12,choice13,choice16,choice15,choice14);
+							System.out.println("Artist:");
+							String choice14=sc.nextLine();
+					
+							CompactDisc cd=new CompactDisc(choice12,choice13,choice16,choice14);
 							b.addmedia(cd);
 							break;
 						}
@@ -300,8 +301,8 @@ public class Aims {
 		authors.add("Hien");
 		Book book=new Book("Don quixote","Novel",18.67f,authors);
 		
-CompactDisc cd = new CompactDisc("Twin Fantasy", "Rock", 11.95f, "Car Seat Headrest","ABC");
-CompactDisc cd1 = new CompactDisc("weq","fds", 23f,"avc","def");
+CompactDisc cd = new CompactDisc("Twin Fantasy", "Rock", 11.95f, "Car Seat Headrest");
+CompactDisc cd1 = new CompactDisc("weq","fds", 23f,"avc");
 		Track track1 = new Track("My Boy (Twin Fantasy)", 3);
 		Track track2 = new Track("Beach Life-In-Death", 12);
 		Track track3 = new Track("Stop Smoking", 1);
@@ -317,14 +318,13 @@ CompactDisc cd1 = new CompactDisc("weq","fds", 23f,"avc","def");
 		cd.addTrack(track2);
 		cd.addTrack(track3);
 		cd.addTrack(track4);
-		cd.addTrack(track5);
-		cd.addTrack(track6);
-		cd.addTrack(track7);
-		cd.addTrack(track8);
-		cd.addTrack(track9);
-		cd.addTrack(track10);
+		cd1.addTrack(track5);
+		cd1.addTrack(track6);
+		cd1.addTrack(track7);
+		
 		b.addmedia(dvd1,dvd2,dvd4,dvd5,dvd6,dvd7,book,cd,cd1);
 		anOrder.addMedia(dvd1,dvd2,dvd4);
-		new StoreManagerScreen(b);
+		new LoginScreen(b);
+		Menu();
 	}
 	}

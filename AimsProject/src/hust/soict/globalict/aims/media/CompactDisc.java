@@ -15,67 +15,47 @@ private String info;
 public String getArtist() {
 	return artist;
 }
-public static final int max_track=10;
+public static final int max_track=20;
 public void setArtist(String artist) {
 	this.artist = artist;
 }
 
 
 
-public CompactDisc(String title, String category, float cost, int length, String artist) {
-	super(title, category, cost, length);
-	this.artist = artist;
-}
-public CompactDisc(String title, String category, float cost, String director, String artist) {
-	super(title, category, cost, director);
+
+public CompactDisc(String title, String category, float cost, String artist) {
+	super(title, category, cost);
 	this.artist = artist; 
 }
-public CompactDisc(String title, String category, float cost, int length, String director, String artist) {
-	super(title, category, cost, length, director);
-	this.artist = artist;
-}
+
 
 
 @Override
 public String toString() {
-	String a= "CompactDisc-" + getTitle() + "-" + artist + "-" + getCategory()+ "-" + getCost()+"-"+getLength()+"-"+getDirector()+"-"+getArtist();
-for(Track t:tracks) {
+	String a= "CompactDisc-" + getTitle() + "-" + artist + "-" + getCategory()+ "-" + getCost()+"-"+getLength()+"-"+getDirector()+"-"+getArtist()+"-";
+	for(Track t:tracks) {
 	a+=t.toString();
 }
 return a;
 }
-public void addTrack(Track ... track ) {
-	int i,flag=0;
-	int count=0;
-	for(i=0;i<tracks.size();i++) {
-		if(this.tracks.size()<CompactDisc.max_track) {
-			boolean a=true;
-			for(Track x:this.tracks) {
-				if (x==track[i]) a=false;
-			}
-			if(a) {
-				this.tracks.add(track[i]);
-				count++;}
-			else {
-				System.out.println(track[i].getTitle());
-			}
-			}
-		}
-		System.out.println(count+ " disc has been added to cart");
+public void addTrack(Track track) {
+	if (tracks.contains(track)) {
+		System.out.println("Track is already in list");
 	}
-public void removeTrack(String title) {
-	if(this.tracks.size()==0) {
-		System.out.println("CD is empty");
-		return;
+	else {
+		tracks.add(track);
+		System.out.println("Track added");
 	}
-	List<Track>toRemove=new ArrayList<Track>();
-	for(Track x:this.tracks) {
-		if(x.getTitle().equals(title)) {
-			toRemove.add(x);
-		}
+}
+
+public void removeTrack(Track track) {
+	if (!tracks.contains(track)) {
+		System.out.println("The track does not exist");
 	}
-this.tracks.removeAll(toRemove);
-System.out.println("All media removed");
+	else {
+		tracks.remove(track);
+		System.out.println("Track removed");
+	}
 }
 public int getLength2() {
 	if(this.tracks==null) {	

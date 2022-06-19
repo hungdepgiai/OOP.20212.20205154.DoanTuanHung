@@ -19,15 +19,16 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.event.MenuListener;
 
 import hust.soict.globalice.aims.playable.Playable;
 import hust.soict.globalict.aims.Store.Store;
 import hust.soict.globalict.aims.media.Media;
 
-public class StoreManagerScreen extends JFrame{
+public class StoreManagerScreen extends JFrame {
 private Store store;
+JMenuItem i1,i2,i3,i;
 JPanel createNorth() {
 	JPanel north=new JPanel();
 	north.setLayout(new BoxLayout(north,BoxLayout.Y_AXIS));
@@ -37,11 +38,49 @@ JPanel createNorth() {
 }
 JMenuBar createMenuBar() {
 	JMenu menu=new JMenu("Options");
-	menu.add(new JMenuItem("View store"));
+	i=new JMenuItem("View store");
+	menu.add(i);
+	i.addActionListener(new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            store.sortbytitle();
+        	new StoreManagerScreen(store);
+            dispose();
+        }
+    });
 	JMenu smUpdateStore=new JMenu("Update Store");
-	smUpdateStore.add(new JMenuItem("Add Book"));
-	smUpdateStore.add(new JMenuItem("Add CD"));
-	smUpdateStore.add(new JMenuItem("Add DVD"));
+	
+	i1=new JMenuItem("Add Book");
+	smUpdateStore.add(i1);
+	i1.addActionListener(new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            new AddBookToStoreScreen(store);
+            dispose();
+        }
+    });
+	i2=new JMenuItem("Add CD");
+	smUpdateStore.add(i2);
+	i2.addActionListener(new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            new AddCompactDiscToStoreScreen(store);
+            dispose();
+        }
+    });
+	i3=new JMenuItem("Add DVD");
+	smUpdateStore.add(i3);
+	i3.addActionListener(new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            new AddDigitalVideoDiscToStoreScreen(store);
+            dispose();
+        }
+    });
 	menu.add(smUpdateStore);
 	JMenuBar menuBar=new JMenuBar();
 	menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -100,6 +139,12 @@ public class MediaStore extends JPanel{
 		if(media instanceof Playable) {
 			JButton playButton = new JButton("Play");
 			container.add(playButton);
+			playButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+		    			JOptionPane.showMessageDialog(container, "Playing media: "+media.toString());
+		    			}
+			});
 		}
 	this.add(Box.createVerticalGlue());
 	this.add(title);
@@ -109,5 +154,6 @@ public class MediaStore extends JPanel{
 	this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	}
 }
+
 
 }
