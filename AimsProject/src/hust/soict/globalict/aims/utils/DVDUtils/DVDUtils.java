@@ -1,5 +1,5 @@
 package hust.soict.globalict.aims.utils.DVDUtils;
-import hust.soict.globalict.aims.dvd.DigitalVideoDisc;
+import hust.soict.globalict.aims.media.DigitalVideoDisc;
 
 public class DVDUtils {
 public static float comparebyCost(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2 )

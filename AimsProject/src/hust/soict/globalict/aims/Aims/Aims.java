@@ -1,17 +1,21 @@
 package hust.soict.globalict.aims.Aims;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
 import hust.soict.globalict.aims.Store.Store;
-import hust.soict.globalict.aims.book.Book;
 import hust.soict.globalict.aims.cart.Cart.cart;
-import hust.soict.globalict.aims.cd.CompactDisc;
-import hust.soict.globalict.aims.dvd.DigitalVideoDisc;
+import hust.soict.globalict.aims.media.Book;
+import hust.soict.globalict.aims.media.CompactDisc;
+import hust.soict.globalict.aims.media.DigitalVideoDisc;
 import hust.soict.globalict.aims.media.Media;
-import hust.soict.globalict.aims.media.MemoryDaemon;
-import java.util.*;
+import hust.soict.globalict.aims.media.Track;
+import hust.soict.globalict.aims.screen.manager.StoreManagerScreen;
 public class Aims {
 	
 	public static Store b=new Store();
 	public static cart anOrder = new cart();	
-	public static MemoryDaemon a=new MemoryDaemon(); 
 	public static void showMenu() 
 	{System.out.println("AIMS: ");
 	System.out.println("--------------------------------");
@@ -287,16 +291,40 @@ public class Aims {
 		
 		DigitalVideoDisc dvd1= new DigitalVideoDisc("The Lion King","Animation",19.95f,87,"Roger Allers");
 		DigitalVideoDisc dvd2= new DigitalVideoDisc("Star Wars","Science Fiction",24.95f,87,"George Lucas");
+		DigitalVideoDisc dvd4 = new DigitalVideoDisc("Princess Mononoke","Animation",18.99f,133,"Hayao Miyazaki");
+		DigitalVideoDisc dvd5 = new DigitalVideoDisc("Spirited Away","Animation",18.15f,125, "Hayao Miyazaki");
+		DigitalVideoDisc dvd6 = new DigitalVideoDisc("Tenet","Action",  22.45f,75, "Christopher Nolan");
+		DigitalVideoDisc dvd7 = new DigitalVideoDisc("2001: A Space Odyssey","Science Fiction",15.99f,90, "Stanley Kubrick");
 		ArrayList<String>authors=new ArrayList<String>();
 		authors.add("Hung");
 		authors.add("Hien");
 		Book book=new Book("Don quixote","Novel",18.67f,authors);
-		CompactDisc cd1=new CompactDisc("a","b",23f,4,"d","o");
-		CompactDisc cd2=new CompactDisc("e","f",22f,5,"h","q");
-		CompactDisc cd3=new CompactDisc("i","j",21f,6,"l","r");
-		CompactDisc cd4=new CompactDisc("m","n",20f,7,"p","s");
-		b.addmedia(dvd1,dvd2,book);
-		anOrder.addMedia(cd1,cd2,cd3,cd4);
-		Menu();
+		
+CompactDisc cd = new CompactDisc("Twin Fantasy", "Rock", 11.95f, "Car Seat Headrest","ABC");
+CompactDisc cd1 = new CompactDisc("weq","fds", 23f,"avc","def");
+		Track track1 = new Track("My Boy (Twin Fantasy)", 3);
+		Track track2 = new Track("Beach Life-In-Death", 12);
+		Track track3 = new Track("Stop Smoking", 1);
+		Track track4 = new Track("Sober To Death", 5);
+		Track track5 = new Track("Nervous Young Inhumans", 4);
+		Track track6 = new Track("Bodys", 6);
+		Track track7 = new Track("Cute Thing", 5);
+		Track track8 = new Track("High to Death", 6);
+		Track track9 = new Track("Famous Prophets (Minds)", 10);
+		Track track10 = new Track("Twin Fantasy (Those Boys)", 6);
+		
+		cd.addTrack(track1);
+		cd.addTrack(track2);
+		cd.addTrack(track3);
+		cd.addTrack(track4);
+		cd.addTrack(track5);
+		cd.addTrack(track6);
+		cd.addTrack(track7);
+		cd.addTrack(track8);
+		cd.addTrack(track9);
+		cd.addTrack(track10);
+		b.addmedia(dvd1,dvd2,dvd4,dvd5,dvd6,dvd7,book,cd,cd1);
+		anOrder.addMedia(dvd1,dvd2,dvd4);
+		new StoreManagerScreen(b);
 	}
 	}

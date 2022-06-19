@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import hust.soict.globalict.aims.dvd.DigitalVideoDisc;
+import hust.soict.globalict.aims.media.DigitalVideoDisc;
 import hust.soict.globalict.aims.media.Media;
 
 public class Store {
@@ -88,5 +88,8 @@ public class Store {
 	}
 	public void Empty() {
 		this.itemsOrdered.removeAll(itemsOrdered);
+	}
+	public ArrayList<Media> getItemsInStore() {
+		return itemsOrdered;
 	}
 }

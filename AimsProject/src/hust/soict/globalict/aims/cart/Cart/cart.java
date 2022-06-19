@@ -5,17 +5,14 @@ import java.util.List;
 import java.util.Scanner;
 
 import hust.soict.globalict.aims.Aims.Aims;
-import hust.soict.globalict.aims.dvd.DigitalVideoDisc;
+import hust.soict.globalict.aims.media.DigitalVideoDisc;
 import hust.soict.globalict.aims.media.Media;
 public class cart {
 public static final int MAX_NUMBERS_ORDERED = 20;
 private static final String STDIN_SCANNER = null;
-int qty=0;
 int i;
-public static Aims e=new Aims();
 
 public ArrayList<Media> itemsOrdered = new ArrayList<Media>();
-public ArrayList<Media> tmp = new ArrayList<Media>();
 public void addMedia(Media...medias) {
 	int size=0;
 	for(int i=0;i<medias.length;i++) {
