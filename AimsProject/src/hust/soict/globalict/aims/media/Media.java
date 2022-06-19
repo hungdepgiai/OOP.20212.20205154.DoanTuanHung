@@ -3,9 +3,13 @@ package hust.soict.globalict.aims.media;
 import java.time.LocalDate;
 import java.util.Comparator;
 
+import hust.soict.globalict.aims.Comparator.MediaComparatorByCostTitle;
+import hust.soict.globalict.aims.Comparator.MediaComparatorByTitleCost;
+
 public class Media implements Comparable<Media>{
-	public static final Comparator<Media> COMPARE_BY_COST_TITLE=
-			new MediaComparatorByCostTitle();
+	
+	public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitleCost();
+	public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCostTitle();
 	private static int nbmedia=0;
 	private int id;
 	private String title;
