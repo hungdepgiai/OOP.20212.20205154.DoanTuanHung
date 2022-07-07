@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import hust.soict.globalict.aims.Store.Store;
-import hust.soict.globalict.aims.cart.Cart.cart;
+import hust.soict.globalict.aims.cart.Cart.Cart;
 import hust.soict.globalict.aims.media.Book;
 import hust.soict.globalict.aims.media.CompactDisc;
 import hust.soict.globalict.aims.media.DigitalVideoDisc;
@@ -16,7 +16,7 @@ import hust.soict.globalict.aims.screen.manager.StoreManagerScreen;
 public class Aims {
 	
 	public static Store b=new Store();
-	public static cart anOrder = new cart();	
+	public static Cart anOrder = new Cart();	
 	public static void showMenu() 
 	{System.out.println("AIMS: ");
 	System.out.println("--------------------------------");
@@ -295,7 +295,7 @@ public class Aims {
 		DigitalVideoDisc dvd4 = new DigitalVideoDisc("Princess Mononoke","Animation",18.99f,133,"Hayao Miyazaki");
 		DigitalVideoDisc dvd5 = new DigitalVideoDisc("Spirited Away","Animation",18.15f,125, "Hayao Miyazaki");
 		DigitalVideoDisc dvd6 = new DigitalVideoDisc("Tenet","Action",  22.45f,75, "Christopher Nolan");
-		DigitalVideoDisc dvd7 = new DigitalVideoDisc("2001: A Space Odyssey","Science Fiction",15.99f,90, "Stanley Kubrick");
+		DigitalVideoDisc dvd7 = new DigitalVideoDisc("Space Wars","Science Fiction",15.99f,90, "Stanley Kubrick");
 		ArrayList<String>authors=new ArrayList<String>();
 		authors.add("Hung");
 		authors.add("Hien");

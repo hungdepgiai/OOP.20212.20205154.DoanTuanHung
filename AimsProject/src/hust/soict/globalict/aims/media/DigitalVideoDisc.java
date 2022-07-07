@@ -2,8 +2,8 @@ package hust.soict.globalict.aims.media;
 
 import java.time.LocalDate;
 
-import hust.soict.globalice.aims.disc.Disc;
-import hust.soict.globalice.aims.playable.Playable;
+import hust.soict.globalict.aims.disc.Disc;
+import hust.soict.globalict.aims.playable.Playable;
 
 public class DigitalVideoDisc extends Disc implements Playable {
 public DigitalVideoDisc(String title, String category, float cost, int length, String director) {

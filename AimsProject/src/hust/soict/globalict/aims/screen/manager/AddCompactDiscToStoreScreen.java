@@ -1,47 +1,32 @@
 package hust.soict.globalict.aims.screen.manager;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
+import java.awt.Component;
 import java.awt.Font;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import hust.soict.globalict.aims.Store.Store;
-import hust.soict.globalict.aims.media.Book;
 import hust.soict.globalict.aims.media.CompactDisc;
+import hust.soict.globalict.aims.media.Track;
 
-public class AddCompactDiscToStoreScreen extends JFrame{
-private Store store;
-
-public AddCompactDiscToStoreScreen(Store store) {
-	String response;
-	response=JOptionPane.showInputDialog("Enter title:");
-	String title=response;
-	response=JOptionPane.showInputDialog("Enter category:");
-	String category=response;
-	response=JOptionPane.showInputDialog("Enter cost:");
-	float cost=Float.parseFloat(response);
-	response=JOptionPane.showInputDialog("Enter artist:");
-	String artist=response;
+public class AddCompactDiscToStoreScreen extends AddItemToStore{
 	
-	CompactDisc cd=new CompactDisc(title,category,cost,artist);
-	store.addmedia(cd);
-	int input = JOptionPane.showConfirmDialog(null, 
-            "CD added to store!", "Add CD", JOptionPane.DEFAULT_OPTION);
-    // 0=ok
-    if(input==0) {
-    	new StoreManagerScreen(store);
-    }
-}
-
+	private StoreManagerScreen sms;
+	
+	public AddCompactDiscToStoreScreen(Store store, StoreManagerScreen sms) {
+		super(store, sms);
+		addMediaContent(new JLabel("ADD CD"),new JLabel[]{new JLabel("Title: "), new JLabel("Category: "), new JLabel("Cost: "), new JLabel("Artist: "), new JLabel("Number of tracks: ")});
+	}
 }

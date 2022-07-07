@@ -22,28 +22,13 @@ import javax.swing.JTextField;
 import hust.soict.globalict.aims.Store.Store;
 import hust.soict.globalict.aims.media.Book;
 
-public class AddBookToStoreScreen extends JFrame {
-	private Store store;
+public class AddBookToStoreScreen extends AddItemToStore{
+
+	private StoreManagerScreen sms;
 	
-	public AddBookToStoreScreen(Store store) {
-		String response;
-		response=JOptionPane.showInputDialog("Enter title:");
-		String title=response;
-		response=JOptionPane.showInputDialog("Enter category:");
-		String category=response;
-		response=JOptionPane.showInputDialog("Enter cost:");
-		float cost=Float.parseFloat(response);
-		response=JOptionPane.showInputDialog("Authors name,split by comma");
-		String authors=response;
-		List<String>b1=new ArrayList<>(Arrays.asList(authors.split(",")));
-		Book book=new Book(title,category,cost,b1);
-		store.addmedia(book);
-		int input = JOptionPane.showConfirmDialog(null, 
-                "Book added to store!", "Add book", JOptionPane.DEFAULT_OPTION);
-        // 0=ok
-        if(input==0) {
-        	new StoreManagerScreen(store);
-        }
+	public AddBookToStoreScreen(Store store, StoreManagerScreen sms) {
+		super(store, sms);
+		addMediaContent(new JLabel("ADD BOOK"),new JLabel[]{new JLabel("Title: "), new JLabel("Category: "), new JLabel("Cost: ")});
 	}
 	
 }

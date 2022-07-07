@@ -3,8 +3,8 @@ package hust.soict.globalict.aims.media;
 import java.util.ArrayList;
 import java.util.List;
 
-import hust.soict.globalice.aims.disc.Disc;
-import hust.soict.globalice.aims.playable.Playable;
+import hust.soict.globalict.aims.disc.Disc;
+import hust.soict.globalict.aims.playable.Playable;
 
 public class CompactDisc extends Disc implements Playable {
 private int id;

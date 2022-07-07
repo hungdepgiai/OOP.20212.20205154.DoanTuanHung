@@ -1,6 +1,6 @@
 package hust.soict.globalict.aims.media;
 
-import hust.soict.globalice.aims.playable.Playable;
+import hust.soict.globalict.aims.playable.Playable;
 
 public class Track implements Playable,Comparable<Track> {
 private String title;
