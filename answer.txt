@@ -1,5 +1,8 @@
-1. When should accessor methods be used?
-Accessor methods controls access to its attribute by providing a single location to inspect and/or modify that attribute. Code can also be added to perform operations such as range checks. 
-The user's inputs of modification is also controlled by the system to make sure they fit the convention of the system.
-2.If you create a constructor method to build a DVD by title then create a constructor method to build a DVD by category. Does JAVA allow you to do this?
-No, because if we do this, we will duplicate the created constructor. And Javascript does not support defining multiple constructors.
+Is JAVA a Pass by Value or a Pass by Reference programming language?
+* Java is always a pass by value programming language.
++ In case of passing primitive data types: 
+- Primitive variables are directly stored in stack memory. 
+- Whenever any variable of primitive data type is passed as an argument, the actual parameters are copied to formal arguments and these formal arguments accumulate their own space in stack memory.
++ In case of passing object references:
+- Whenever an object is passed as an argument, an exact copy of the reference variable is created which points to the same location of the object in heap memory as the original reference variable.
+- As a result of this, whenever we make any change in the same object in the method, that change is reflected in the original object

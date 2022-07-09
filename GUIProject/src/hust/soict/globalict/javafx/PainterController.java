@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -18,7 +19,8 @@ public class PainterController {
 	private RadioButton Pen;
 	@FXML
 	private RadioButton Eraser;
-	
+	 @FXML
+	    private ToggleGroup identical;
 	@FXML
 	public void clearButtonPressed(ActionEvent event) {
 		drawingAreaPane.getChildren().clear();
@@ -34,6 +36,7 @@ public class PainterController {
 			Circle circle=new Circle(event.getX(),event.getY(),4,Color.WHITE);
 			drawingAreaPane.getChildren().add(circle);
 		}
-	}
+			}
+	
 	
 }
