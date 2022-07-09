@@ -2,11 +2,12 @@ package hust.soict.globalict.test.media;
 
 import java.util.ArrayList;
 
+import hust.soict.globalict.aims.exception.MediaException;
 import hust.soict.globalict.aims.media.DigitalVideoDisc;
 
 public class TestMediaCompareTo {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws MediaException {
 		ArrayList <DigitalVideoDisc> collection=new ArrayList<DigitalVideoDisc>(); 
 		DigitalVideoDisc dvd1= new DigitalVideoDisc("The Lion King","Animation",19.95f,87,"Roger Allers");
 		DigitalVideoDisc dvd2= new DigitalVideoDisc("Star Wars","Science Fiction",24.95f,87,"George Lucas");

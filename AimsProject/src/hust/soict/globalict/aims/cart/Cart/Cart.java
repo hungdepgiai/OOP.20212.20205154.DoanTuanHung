@@ -4,9 +4,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.naming.LimitExceededException;
+
 import hust.soict.globalict.aims.Aims.Aims;
+import hust.soict.globalict.aims.exception.DuplicateException;
+import hust.soict.globalict.aims.exception.PlayerException;
 import hust.soict.globalict.aims.media.DigitalVideoDisc;
 import hust.soict.globalict.aims.media.Media;
+import hust.soict.globalict.aims.playable.Playable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 public class Cart {
@@ -15,7 +20,12 @@ private static final String STDIN_SCANNER = null;
 int i;
 
 public ObservableList<Media> itemsOrdered = FXCollections.observableArrayList();
-public void addMedia(Media...medias) {
+public final ObservableList<Media> sortByTitle() {
+	ObservableList<Media> itemsDisplay = this.getItemsOrdered();; // immutability
+	Collections.sort(itemsDisplay,Media.COMPARE_BY_TITLE_COST);  
+	return itemsDisplay;
+}
+public void addMedia(Media...medias)throws LimitExceededException,DuplicateException {
 	int size=0;
 	for(int i=0;i<medias.length;i++) {
 	if(itemsOrdered.size()<this.MAX_NUMBERS_ORDERED) {
@@ -30,9 +40,12 @@ public void addMedia(Media...medias) {
 		else {
 			System.out.println(medias[i].getTitle()+" is already added");
 		}
+		
+	}
+	else {
+		throw new LimitExceededException("ERROR: The number of " + "media has reached its limit");
 	}
 	}
-	System.out.println(size+ " medias are added successfully!");
 }
 public Media search(String title) {
 	int flag=0;
@@ -142,6 +155,19 @@ public void searchbyid(int id) {
 	}
 	if(flag==0)System.out.println("No match found");
 }
+public Media searchItemById(int id) {
+	Media result;
+	boolean found = false;
+	for(Media media: itemsOrdered) {
+		if(id == media.getId()) {
+			result = media;
+			System.out.println(media.toString());
+			return result;
+		}
+	}
+	System.out.println("No item with ID: " + id + " found!");
+	return null;			
+}
 public Media searchbytitle(String title) {
 	int flag=0;
 	for(Media x:this.itemsOrdered) {
@@ -158,6 +184,19 @@ public Media searchbytitle(String title) {
 	}
 	return null;
 }
+public ObservableList<Media> searchItemByTitle(String title) {
+	boolean found = false;
+	ObservableList<Media> matchMedias = FXCollections.observableArrayList();
+	for(Media media : itemsOrdered) {
+		if(media == null) break;
+		if(media.isMatch(title)) {
+			matchMedias.add(media);
+			found = true;
+		}
+	}
+	if(found) return matchMedias;
+	return null;
+}
 public void print()
 {
 	System.out.println("***********************CART***********************");
@@ -171,6 +210,13 @@ public void print()
 }
 public void Empty() {
 	this.itemsOrdered.removeAll(itemsOrdered);
+}
+public void play(Media media) throws PlayerException {
+	if(media instanceof Playable) {
+		((Playable) media).play();
+	}else {
+		System.out.println("Cannot play this type of Media (" + media.toString() + ")");
+	}
 }
 public ObservableList<Media> getItemsOrdered() {
 	return this.itemsOrdered;

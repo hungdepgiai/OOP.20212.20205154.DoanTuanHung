@@ -4,13 +4,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.naming.LimitExceededException;
+
 import hust.soict.globalict.aims.Store.Store;
 import hust.soict.globalict.aims.cart.Cart.Cart;
+import hust.soict.globalict.aims.exception.DuplicateException;
+import hust.soict.globalict.aims.exception.MediaException;
+import hust.soict.globalict.aims.exception.PlayerException;
 import hust.soict.globalict.aims.media.Book;
 import hust.soict.globalict.aims.media.CompactDisc;
 import hust.soict.globalict.aims.media.DigitalVideoDisc;
 import hust.soict.globalict.aims.media.Media;
 import hust.soict.globalict.aims.media.Track;
+import hust.soict.globalict.aims.playable.Playable;
 import hust.soict.globalict.aims.screen.manager.LoginScreen;
 import hust.soict.globalict.aims.screen.manager.StoreManagerScreen;
 public class Aims {
@@ -27,7 +33,7 @@ public class Aims {
 	System.out.println("--------------------------------");
 	System.out.println("Please choose a number: 0-1-2-3");
 	}
-	public static void cartMenu() 
+	public static void cartMenu() throws LimitExceededException, DuplicateException, MediaException, PlayerException 
 	{
 		int choice2=10;
 	System.out.println("Enter media title you want to play:");
@@ -120,13 +126,13 @@ public class Aims {
 		break;
 	}
 	}
-	public static void storeMenu() 
+	public static void storeMenu() throws LimitExceededException, DuplicateException, MediaException, PlayerException 
 	{
 	Scanner sc=new Scanner(System.in);
 		System.out.println("Enter media title to play:");
 	String choice3=sc.nextLine();
 	Media media1=b.searchByTitle(choice3);
-	if(media1!=null) {
+	if(media1!=null && media1 instanceof Playable) {
 		media1.play();
 	}
 	else {
@@ -196,7 +202,7 @@ public class Aims {
 		System.out.println("1.Yes");
 		System.out.println("2.No");
 	}
-	public static void Menu()
+	public static void Menu() throws LimitExceededException, DuplicateException, MediaException, PlayerException
 	{
 		Scanner sc=new Scanner(System.in);
 		showMenu();
@@ -287,7 +293,7 @@ public class Aims {
 			}
 		
 		
-	public static void main(String[]args)
+	public static void main(String[]args) throws LimitExceededException, DuplicateException, MediaException, PlayerException
 	{	
 		
 		DigitalVideoDisc dvd1= new DigitalVideoDisc("The Lion King","Animation",19.95f,87,"Roger Allers");

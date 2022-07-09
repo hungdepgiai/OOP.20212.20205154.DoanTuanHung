@@ -1,6 +1,7 @@
 package hust.soict.globalict.aims.screen.manager;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -21,6 +22,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import hust.soict.globalict.aims.Store.Store;
+import hust.soict.globalict.aims.exception.PlayerException;
 import hust.soict.globalict.aims.media.Media;
 import hust.soict.globalict.aims.playable.Playable;
 
@@ -34,17 +36,16 @@ public class StoreManagerScreen extends JFrame implements ActionListener{
 	private JMenuItem viewStore;
 	private JMenu smUpdateStore;
 	private JMenu menu;
+	private Container cp;
 	
-	public StoreManagerScreen(Store store) {
+	public StoreManagerScreen(Store store) throws PlayerException{
 		this.store = store;
 		
-//		Container cp = getContentPane();
-		setLayout(new BorderLayout());
-		add(createNorth(), BorderLayout.NORTH);
+		cp = getContentPane();
+		cp.setLayout(new BorderLayout());
+		cp.add(createNorth(), BorderLayout.NORTH);
+			cp.add(createCenter(), BorderLayout.CENTER);			
 		
-		viewStorePanel = createCenter();
-		add(viewStorePanel, BorderLayout.CENTER);
-		currentScreen = viewStorePanel;
 		
 		setTitle("Store");
 		setSize(1024, 768);
@@ -62,24 +63,20 @@ public class StoreManagerScreen extends JFrame implements ActionListener{
 	
 	JMenuBar createMenuBar() {
 		menu = new JMenu("Options");
-		
-		viewStore = new JMenuItem("View store");
-		viewStore.addActionListener(this);
-		menu.add(viewStore);
-		
-		smUpdateStore = new JMenu("Update Store");
-		
 		addBook = new JMenuItem("Add Book");
 		addCD = new JMenuItem("Add CD");
 		addDVD = new JMenuItem("Add DVD");
-		
-		addBook.addActionListener(this);
-		addCD.addActionListener(this);
-		addDVD.addActionListener(this);
-		
+		smUpdateStore = new JMenu("Update Store");
+	
+		addBook.addActionListener(new AddBookListener());
+		addCD.addActionListener(new AddCDListener());
+		addDVD.addActionListener(new AddDVDListener());
 		smUpdateStore.add(addBook);
 		smUpdateStore.add(addCD);
 		smUpdateStore.add(addDVD);
+		viewStore = new JMenuItem("View store");
+		viewStore.addActionListener(new ViewStoreListener());
+		menu.add(viewStore);
 		menu.add(smUpdateStore);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -116,7 +113,39 @@ public class StoreManagerScreen extends JFrame implements ActionListener{
 		}
 		return center;
 	}
-	
+	private class ViewStoreListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent ae) {
+			dispose();
+			try {
+				new StoreManagerScreen(store);
+			} catch (PlayerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	private class AddDVDListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent ae) {
+			dispose();
+			new AddDigitalVideoDiscToStoreScreen(store);
+		}
+	}
+	private class AddBookListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent ae) {
+			dispose();
+			new AddBookToStoreScreen(store);
+		}
+	}
+	private class AddCDListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent ae) {
+			dispose();
+			new AddCompactDiscToStoreScreen(store);
+		}
+	}
 	public class MediaStore extends JPanel {
 		private Media media;
 		public MediaStore(Media media) {
@@ -175,17 +204,11 @@ public class StoreManagerScreen extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == addBook) {
-			switchScreen(currentScreen, new AddBookToStoreScreen(store, this));
-		}
-		if (e.getSource() == addCD) {
-			switchScreen(currentScreen, new AddCompactDiscToStoreScreen(store, this));
-		}
-		if (e.getSource() == addDVD) {
-			switchScreen(currentScreen, new AddDigitalVideoDiscToStoreScreen(store, this));
-		}
-		if (e.getSource() == viewStore) {
-			switchScreen(currentScreen, createCenter());	
+		// TODO Auto-generated method stub
+		if(addDVD.isSelected()) {
+			new AddDigitalVideoDiscToStoreScreen(store);
 		}
 	}
+
+	
 }

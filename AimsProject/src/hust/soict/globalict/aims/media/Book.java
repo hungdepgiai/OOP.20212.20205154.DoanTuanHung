@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import hust.soict.globalict.aims.exception.MediaException;
+
 public class Book extends Media{
 	private String content;
 private List<String> contentTokens=new ArrayList<String>();
@@ -82,7 +84,7 @@ public void  removeAuthor(String authorName) {
 	}
 	this.authors.remove(authorName);
 }
-public Book(String title, String category, float cost, List<String> authors) {
+public Book(String title, String category, float cost, List<String> authors) throws MediaException {
 	super(title, category, cost);
 	this.authors = authors;
 }

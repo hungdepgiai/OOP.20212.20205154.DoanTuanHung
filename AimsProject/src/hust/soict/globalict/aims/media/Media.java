@@ -1,13 +1,28 @@
 package hust.soict.globalict.aims.media;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Comparator;
 
 import hust.soict.globalict.aims.Comparator.MediaComparatorByCostTitle;
 import hust.soict.globalict.aims.Comparator.MediaComparatorByTitleCost;
+import hust.soict.globalict.aims.exception.MediaException;
+import hust.soict.globalict.aims.exception.PlayerException;
 
 public class Media implements Comparable<Media>{
-	
+	public boolean isMatch(String title) {
+		String[] searchTokens = title.toLowerCase().split(" ");
+		String[] dvdTokens = this.getTitle().toLowerCase().split(" ");
+		for(String token : searchTokens) {
+			if(Arrays.asList(dvdTokens).contains(token)) {
+				return true;
+			}else {
+				return false;
+			}
+		}
+		return false;
+	}
 	public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitleCost();
 	public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCostTitle();
 	private static int nbmedia=0;
@@ -16,6 +31,7 @@ public class Media implements Comparable<Media>{
 	private String category;
 	private float cost;
 	private LocalDate dateAdded;
+	private static int nbDigitalVideoDiscs = 0;
 	
 	public int getId() {
 		return id;
@@ -57,14 +73,26 @@ public class Media implements Comparable<Media>{
 	private static int get_number() {
 		return nbmedia;
 	}
-	public Media(String title, String category, float cost) {
+	public Media(String title, String category, float cost) throws MediaException{
 		super();
-		this.title = title;
-		this.category = category;
-		this.cost = cost;
-		this.id=nbmedia;
-		this.dateAdded=LocalDate.now();
-		nbmedia++;
+		if(title != null) {
+			this.title = title;
+		}else {
+			throw new MediaException("ERROR: Entered Title string is invalid!");
+		}
+		if(category != null) {
+			this.category = category;
+		}else {
+			throw new MediaException("ERROR: Entered Category string is invalid!");
+		}
+		if(cost > 0) {
+			this.cost = cost;
+		}else {
+			throw new MediaException("ERROR: Entered cost must be non-positive");
+		}
+			nbDigitalVideoDiscs++;
+			this.id = nbDigitalVideoDiscs;
+			this.dateAdded = LocalDate.now();
 	}
 	
 	@Override
@@ -107,12 +135,25 @@ public class Media implements Comparable<Media>{
 		}
 		return true;
 }
-	public void play() {
-		System.out.println("Playing media");
-	}
+	
 	
 	public int compareTo(Media o) {
-		return this.getTitle().compareTo(o.getTitle());
+		try {
+			if(!(o instanceof Media)) return -1;
+			Media castMedia = (Media)o;
+			int compareTitle = title.compareTo(castMedia.getTitle());
+			int compareCategory = category.compareTo(castMedia.getCategory());
+			if(compareTitle == 0) return compareCategory;
+			return compareTitle;			
+		}catch(NullPointerException e) {
+			e.printStackTrace();
+		}catch(ClassCastException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	public void play()throws PlayerException {
+		
 	}
 }
 
